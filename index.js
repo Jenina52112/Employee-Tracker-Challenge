@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
-
+const {sequelize, mysql2} = require('./config/connection');
 // Sample employee database
 let employees = [];
-
+let departmentNames = []
 // Function to add a new employee
 function addEmployee() {
     inquirer.prompt([
@@ -38,6 +38,7 @@ function viewEmployees() {
     mainMenu();
 }
 
+
 // Function to delete an employee
 function deleteEmployee() {
     inquirer.prompt([
@@ -64,9 +65,12 @@ function mainMenu() {
         type: 'list',
         name: 'option',
         message: 'Choose an option:',
-        choices: ['Add Employee', 'View Employees', 'Delete Employee', 'Exit']
+        choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add a Department', 'Add a Role', 'Add an Employee', 'Update an Employee Role', 'Add Employee', 'View Employees', 'Delete Employee', 'Exit']
     }).then(answer => {
         switch (answer.option) {
+            case 'View All Departments':
+                'SELECT * FROM departmen_list';
+                break;
             case 'Add Employee':
                 addEmployee();
                 break;
@@ -82,6 +86,11 @@ function mainMenu() {
         }
     });
 }
+
+//for departments
+
+
+
 
 // Start the application
 console.log('Welcome to the Employee Tracker!');
