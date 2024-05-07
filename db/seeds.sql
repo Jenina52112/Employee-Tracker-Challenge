@@ -1,5 +1,5 @@
 INSERT INTO department_list (Department)
-VALUES("Receiving"),
+VALUES ("Receiving"),
     ("Inventory"),
     ("Shipping"),
     ("Picking"),
@@ -16,12 +16,22 @@ VALUES ('Receiver', 'Receiving', 47000),
         ('Am Supervisor', 'Receiving', 70000),
         ('Pm Supervisor', 'Shipping', 75000);
 
-INSERT INTO employees (Employee_Id, First_Name, Last_Name, Job_title, Department, Salary, Manager_name)
-VALUES (701, 'Jasmin', 'Gonzalez', 'Packer', 'Packing', 'JGALVAN'),
-        (702, 'Medel', 'Cruz', 'Am Supervisor', 'Picking', 'Juan'),
+INSERT INTO employees (Employee_Id, First_Name, Last_Name, Job_title, Manager_name)
+VALUES (701, 'Jasmin', 'Gonzalez', 'Packer', 'JGALVAN'),
+        (702, 'Medel', 'Cruz', 'Am Supervisor', 'Juan'),
         (703, 'Dominga', 'Menor', 'Inventory Associate', 'Patricia'),
         (704, 'Lilyden', 'Laureta', 'Order Picker', 'Sumi'),
-        (705, 'Jessie', 'dela Cruz', 'Dock Associate', 'Desiree');
+        (705, 'Jessie', 'dela Cruz', 'Dock Associate', 'Desiree'),
+        (706, 'Joel', 'Flores', 'Pm Supervisor', 'Juan');
+
+
+UPDATE employees
+INNER JOIN roles ON employees.Job_title = roles.Job_title
+SET employees.Salary = roles.Salary;
+
+UPDATE employees
+INNER JOIN roles ON employees.Job_title = roles.Job_title
+SET employees.Department = roles.Department;
 
 
 
