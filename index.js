@@ -1,21 +1,6 @@
  const inquirer = require('inquirer');
- // Import necessary modules
-
-// Use the viewDepartments function
-
-
-// const mysql = require('mysql2');
-
-// // Create a connection to your MySQL database
-// const connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'June152019!',
-//   database: 'db'
-// });
-
-const {mysql, connection} = require('./config/connection')
-
+//const { viewDepartments } = require('./Functions/views')
+const { connection } = require('./config/connection')
 
 // Connect to the database
 connection.connect(err => {
@@ -50,6 +35,7 @@ function startApp() {
           'Update manager name of an employee',
           'View employees by manager',
           'View employees by Department',
+          'View total utilized budget of a department',
           'Exit'
         ]
       }
@@ -70,9 +56,6 @@ function startApp() {
           break;
         case 'Add a role':
           addRole();
-          break;
-        case 'View all departments':
-          viewDepartments();
           break;
         case 'Delete a Role':
         deleteRole();
@@ -97,6 +80,9 @@ function startApp() {
           break;
         case 'View employees by Department':
           viewEmployeesByDepartment();
+          break;
+        case 'View total utilized budget of a department':
+          viewBudgetByDepartment();
           break;
         case 'Exit':
           connection.end(); // Close the database connection
@@ -533,3 +519,38 @@ function updateEmployeeRole() {
       });
   }
   
+  function viewBudgetByDepartment() {
+    inquirer
+      .prompt([
+        {
+          type: 'input',
+          name: 'departmentName',
+          message: 'Enter the name of the department to view the combined salaries:'
+        }
+      ])
+      .then(departmentAnswer => {
+        connection.query(
+          'SELECT SUM(Salary) AS combinedSalaries FROM employees WHERE Department = ?',
+          [departmentAnswer.departmentName],
+          (err, results) => {
+            if (err) {
+              console.error('Error retrieving combined salaries by department:', err);
+              return;
+            }
+  
+            if (results.length === 0 || results[0].combinedSalaries === null) {
+              console.log('No employees found for the specified department.');
+            } else {
+              console.log(`Combined salaries for department ${departmentAnswer.departmentName}: $${results[0].combinedSalaries}`);
+            }
+  
+            startApp(); // Go back to the main menu
+          }
+        );
+      });
+  }
+  
+  module.exports = { 
+    startApp, viewRoles, viewDepartments, viewEmployees, addDepartment, addRole, deleteRole, deleteEmployee, deleteDept,
+    addEmployee, updateEmployeeRole, updateManagerName, viewEmployeesByManager, viewEmployeesByDepartment
+   }

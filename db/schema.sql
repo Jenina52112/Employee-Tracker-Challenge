@@ -21,13 +21,14 @@ CREATE TABLE roles (
 );
 
 CREATE TABLE employees (
-    Employee_Id INT NOT NULL,
+    Employee_Id INT NOT NULL auto_increment,
     First_Name VARCHAR(30) NOT NULL,
     Last_Name VARCHAR(30) NOT NULL,
     Job_title VARCHAR(30) NOT NULL,
     Department VARCHAR(30),
     Manager_name VARCHAR(30) NOT NULL,
-    Salary INT
+    Salary INT,
+    PRIMARY KEY (Employee_Id)
     
 );
 
