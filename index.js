@@ -1,12 +1,14 @@
- const inquirer = require('inquirer');
-//const { viewDepartments } = require('./Functions/views')
+const inquirer = require('inquirer');
 const { connection } = require('./config/connection');
 
+//imported files from public folder
 const { viewDepartments, viewRoles, viewEmployees } = require('./public/viewFunctions');
 const { addDepartment, addRole, addEmployee } = require('./public/addFunctions');
 const { deleteRole, deleteEmployee, deleteDept } = require('./public/deleteFunctions');
 const { updateEmployeeRole, updateManagerName } = require('./public/updateFunctions');
 const { viewEmployeesByManager, viewEmployeesByDepartment, viewBudgetByDepartment } = require('./public/filter')
+
+
 // Connect to the database
 connection.connect(err => {
   if (err) {
@@ -94,7 +96,7 @@ function startApp() {
           return;
       }
     });
-}
+};
 
 
 
