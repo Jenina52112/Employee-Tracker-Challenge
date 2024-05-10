@@ -1,17 +1,16 @@
+--this creates and use the database db
 DROP DATABASE IF EXISTS db;
 CREATE DATABASE db;
 USE db;
 
-
+--table for departments
 CREATE TABLE department_list (
     Department_Id INT auto_increment,
     Department VARCHAR (30) NOT NULL,
     PRIMARY KEY (Department_Id)
 );
 
-
-
-
+--table for roles
 CREATE TABLE roles (
     Job_title VARCHAR (30) NOT NULL,
     Role_Id INT auto_increment,
@@ -20,6 +19,7 @@ CREATE TABLE roles (
     PRIMARY KEY (Role_Id)
 );
 
+--table for employees
 CREATE TABLE employees (
     Employee_Id INT NOT NULL auto_increment,
     First_Name VARCHAR(30) NOT NULL,
@@ -28,15 +28,10 @@ CREATE TABLE employees (
     Department VARCHAR(30),
     Manager_name VARCHAR(30) NOT NULL,
     Salary INT,
-    PRIMARY KEY (Employee_Id)
-    
+    PRIMARY KEY (Employee_Id)    
 );
 
 
-
--- UPDATE table1
--- INNER JOIN table2 ON table1.id = table2.id
--- SET table1.Price = table2.price;
 
 
 

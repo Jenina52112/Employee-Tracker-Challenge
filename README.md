@@ -13,7 +13,7 @@
 
 
 ## Description
-This application is a command line application that manages a company's employee database using Node, Inquirer and MySql.
+This application is a command line application that manages a company's employee database using Node, Inquirer and MySql. Through this, user can view, delete, update and filter informations based on selected command.
 
 ## Installation
 To install this application, clone this repository to your local machine, navigate to the project directory: Employee Tracker challenge and install the dependencies.
