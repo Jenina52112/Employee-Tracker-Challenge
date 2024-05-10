@@ -58,59 +58,59 @@ inquirer
 
 //function for adding employee
 function addEmployee(startAppCallback) {
-    inquirer
-      .prompt([
-        {
-        type: 'input',
-        name: 'employeefName',
-        message: 'Enter the first name of the employee:'
-      },
+  inquirer
+    .prompt([
       {
-        type: 'input',
-        name: 'employeelName',
-        message: 'Enter the last name of the employee:'
-      },
-      {
-        type: 'input',
-        name: 'employeeRole',
-        message: 'Enter the role of the employee:'
-      },
-      {
-        type: 'input',
-        name: 'employeeMgr',
-        message: 'Enter manager of the employee:'
-      }
-    ])
-      .then(answer => {
-      // Retrieve department and salary based on the role from the roles table
-      connection.query(
-        'SELECT Department, Salary FROM roles WHERE Job_title = ?',
-        [answer.employeeRole],
-        (err, roleResults) => {
-          if (err) {
-            console.error('Error retrieving role information:', err);
-            return;
-          }
-          // Extract department and salary from roleResults
-          const department = roleResults[0]?.Department;
-          const salary = roleResults[0]?.Salary;
-          // Insert employee into employees table
-          connection.query(
-            'INSERT INTO employees (First_Name, Last_Name, Job_title, Manager_name, Department, Salary) VALUES (?, ?, ?, ?, ?, ?)',
-            [answer.employeefName, answer.employeelName, answer.employeeRole, answer.employeeMgr, department, salary],
-            (err, results) => {
-              if (err) {
-                console.error('Error adding employee:', err);
-                return;
-              }
-              console.log(answer);
-              console.log('Employee added successfully!');
-              startAppCallback(); // Go back to the main menu
-            }
-          );
+      type: 'input',
+      name: 'employeefName',
+      message: 'Enter the first name of the employee:'
+    },
+    {
+      type: 'input',
+      name: 'employeelName',
+      message: 'Enter the last name of the employee:'
+    },
+    {
+      type: 'input',
+      name: 'employeeRole',
+      message: 'Enter the role of the employee:'
+    },
+    {
+      type: 'input',
+      name: 'employeeMgr',
+      message: 'Enter manager of the employee:'
+    }
+  ])
+    .then(answer => {
+    // Retrieve department and salary based on the role from the roles table
+    connection.query(
+      'SELECT Department, Salary FROM roles WHERE Job_title = ?',
+      [answer.employeeRole],
+      (err, roleResults) => {
+        if (err) {
+          console.error('Error retrieving role information:', err);
+          return;
         }
-      );
-    });
+        // Extract department and salary from roleResults
+        const department = roleResults[0]?.Department;
+        const salary = roleResults[0]?.Salary;
+        // Insert employee into employees table
+        connection.query(
+          'INSERT INTO employees (First_Name, Last_Name, Job_title, Manager_name, Department, Salary) VALUES (?, ?, ?, ?, ?, ?)',
+          [answer.employeefName, answer.employeelName, answer.employeeRole, answer.employeeMgr, department, salary],
+          (err, results) => {
+            if (err) {
+              console.error('Error adding employee:', err);
+              return;
+            }
+            console.log(answer);
+            console.log('Employee added successfully!');
+            startAppCallback(); // Go back to the main menu
+          }
+        );
+      }
+    );
+  });
 };
     
 module.exports = { addDepartment, addRole, addEmployee }

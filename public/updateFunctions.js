@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const {mysql, connection} = require('../config/connection');
+const { connection} = require('../config/connection');
 
 
 //function to update role of an employee  
