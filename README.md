@@ -1,5 +1,7 @@
 
 # Employee Tracker Challenge    
+# [Watch Walthrough Video Here](https://youtu.be/BbtnuEKsrL0?si=onx4iJRkBomwkEu8)
+
 ![alt text](image-1.png)
 
 ## Table of Contents
